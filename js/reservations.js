@@ -1,4 +1,5 @@
 document.addEventListener("DOMContentLoaded", function() {
+    upToDateReservations();
     const reservationList = document.getElementById("reservation-list");
   
     // Token
@@ -6,7 +7,7 @@ document.addEventListener("DOMContentLoaded", function() {
   
     // API URL
     const apiUrl = "https://localhost:7190/api/Reservation/user";
-  
+
     // GET request
     fetch(apiUrl, {
       method: "GET",
@@ -83,3 +84,23 @@ document.addEventListener("DOMContentLoaded", function() {
     });
   }
   
+  function upToDateReservations() {
+    const url = `https://localhost:7190/api/Reservation/uptodate`;
+  
+    fetch(url, {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+      }
+    })
+    .then(response => {
+      if (response.status === 204) {
+      } else {
+        throw new Error('Rezervasyon güncellenemedi. Sunucu hatası.');
+      }
+    })
+    .catch(error => {
+      console.error('Hata:', error.message);
+    });
+}
