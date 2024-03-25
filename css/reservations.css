@@ -1,0 +1,42 @@
+.reservation-container {
+  max-width: 800px;
+  margin: 0 auto;
+  padding: 20px;
+}
+
+h2 {
+  text-align: center;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th, td {
+  padding: 8px;
+  text-align: left;
+  border-bottom: 1px solid #45a049;
+}
+
+th {
+  background-color: #f2f2f2;
+}
+
+.button-container {
+  text-align: center;
+}
+
+.button {
+  padding: 8px 16px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #45a049;
+  color: #fff;
+  border: none;
+}
+
+.button:hover {
+  background-color: #45a049;
+}

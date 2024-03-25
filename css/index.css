@@ -1,0 +1,26 @@
+.container {
+  display: flex;
+  justify-content: space-around; /* Öğeleri yatayda eşit aralıklarla hizalar */
+  align-items: center; /* Öğeleri dikeyde ortalar */
+  height: 100vh; /* Ekran yüksekliği kadar olacak şekilde ayarla */
+}
+
+.item {
+  width: calc(20% - 20px); /* Ekran genişliğinin 20 de 1'i - 20 piksel */
+  height: calc(20vh - 20px); /* Ekran yüksekliğinin 20 de 1'i - 20 piksel */
+  background-color: #f0f0f0;
+  text-align: center;
+  cursor: pointer;
+  padding: 10px;
+  border-radius: 10px;
+}
+
+.item img {
+  max-width: 50px; /* İkonların maksimum genişliği */
+  max-height: 50px; /* İkonların maksimum yüksekliği */
+  margin-bottom: 10px; /* İkonların altına boşluk bırak */
+}
+
+.item span {
+  display: block; /* Satır sonu özelliği ekler */
+}
