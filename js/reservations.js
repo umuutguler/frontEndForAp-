@@ -54,8 +54,8 @@ document.addEventListener("DOMContentLoaded", function() {
   });
   
   function updateReservation(reservationId) {
-    // Rezervasyon güncelleme işlemi
-    // Örneğin: window.location.href = 'update.html?id=' + reservationId;
+    // Rezervasyon güncelleme sayfasına yönlendirme
+    window.location.href = `updateReservation.html?id=${reservationId}`;
   }
   
   function cancelReservation(reservationId) {

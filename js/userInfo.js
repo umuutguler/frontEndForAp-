@@ -33,8 +33,8 @@ document.addEventListener("DOMContentLoaded", function () {
   
     // Bilgileri güncelle butonu tıklandığında
     updateBtn.addEventListener('click', function() {
-      // Burada bilgileri güncelleme işlemleri yapılabilir
-      alert('Bilgiler güncellenecek...');
-    });
+      // Kullanıcıyı updateUser.html sayfasına yönlendir
+      window.location.href = 'updateUser.html';
+  });
   });
   

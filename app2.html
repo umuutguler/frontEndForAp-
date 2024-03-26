@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Reservation</title>
+</head>
+<body>
+  <input type="text" id="startDate" placeholder="Başlangıç Tarihi (YYYY-MM-DDTHH:mm)">
+  <input type="number" id="chairId" placeholder="Koltuk ID">
+  <input type="number" id="duration" placeholder="Süre (dakika)">
+  <button id="postButton">Rezervasyon Yap</button>
+
+  <div id="reservationInfo">
+    <p>Başlangıç Tarihi: <span id="startDate"></span></p>
+    <p>Bitiş Tarihi: <span id="endDate"></span></p>
+    <p>ID: <span id="id"></span></p>
+    <p>Süre: <span id="duration"></span> dakika</p>
+    <p>Fiyat: <span id="price"></span> TL</p>
+  </div>
+
+  <script>
+    const url = "https://localhost:7190/api/Reservation";
+
+    const postButton = document.getElementById("postButton");
+    postButton.addEventListener("click", function() {
+      const startDate = document.getElementById("startDate").value;
+      const chairId = parseInt(document.getElementById("chairId").value);
+      const duration = parseInt(document.getElementById("duration").value);
+
+      if (!startDate || !chairId || !duration) {
+        alert("Lütfen tüm alanları doldurun!");
+        return;
+      }
+
+      const body = {
+        reservationStartDate: startDate,
+        chairId,
+        duration,
+      };
+
+      const xhr = new XMLHttpRequest();
+      xhr.open("POST", url);
+
+      // Header ekleme
+      xhr.setRequestHeader("Content-Type", "application/json");
+      xhr.setRequestHeader("Authorization", `Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJodHRwOi8vc2NoZW1hcy54bWxzb2FwLm9yZy93cy8yMDA1LzA1L2lkZW50aXR5L2NsYWltcy9uYW1lIjoiMDQ2NmJhMjctYjgzYy00MWJkLTg4MjktMmVlYTUyMjljMDQzIiwiaHR0cDovL3NjaGVtYXMubWljcm9zb2Z0LmNvbS93cy8yMDA4LzA2L2lkZW50aXR5L2NsYWltcy9yb2xlIjoiVXNlciIsImV4cCI6MTcxMTM3MTgzOSwiaXNzIjoicHJvamVjdEFwaSIsImF1ZCI6Imh0dHA6Ly9sb2NhbGhvc3Q6MzAwMCJ9.WXEg2F_rDgVXPrIJF4gW65_FhJiSOlXiUJ0g3_1SinA`); // Token ekleme
+
+      xhr.onload = function() {
+        if (xhr.status === 201) {
+          const reservation = JSON.parse(xhr.responseText);
+
+          // Rezervasyon bilgilerini ekrana yazdırma
+          document.getElementById("startDate").innerHTML = reservation.reservationStartDate;
+          document.getElementById("endDate").innerHTML = reservation.reservationEndDate;
+          document.getElementById("id").innerHTML = reservation.id;
+          document.getElementById("duration").innerHTML = reservation.duration;
+          document.getElementById("price").innerHTML = reservation.reservationPrice;
+
+          alert("Rezervasyon başarıyla oluşturuldu!");
+        } else {
+          alert(`Hata: ${xhr.statusText}`);
+        }
+      };
+
+      xhr.send(JSON.stringify(body));
+    });
+  </script>
+</body>
+</html>
