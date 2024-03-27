@@ -64,7 +64,7 @@ document.addEventListener("DOMContentLoaded", function() {
   });
 
   // İlk yükleme için tüm rezervasyonları getir
-  fetchReservations("");
+  fetchReservations("current");
 
 });
 
