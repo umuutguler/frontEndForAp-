@@ -9,6 +9,11 @@
 <body>
   <div class="reservation-container">
     <h2>Rezervasyonlar</h2>
+    <select id="status-dropdown">
+      <option value="current">Current</option>
+      <option value="nonCurrent">Non-Current</option>
+      <option value="cancelled">Cancelled</option>
+  </select>
     <table id="reservation-table">
       <thead>
         <tr>
@@ -17,6 +22,7 @@
           <th>Fiyat</th>
           <th>Süre</th>
           <th>Başlangıç Tarihi</th>
+          
           <th>Bitiş Tarihi</th>
           <th>Oluşturulma Tarihi</th>
           <th>Koltuk ID</th>

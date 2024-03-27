@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rezervasyon Oluştur</title>
+  <link rel="stylesheet" href="css/getReservation.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Rezervasyon Oluştur</h1>
+    <div class="form-group">
+      <label for="calendar">Başlangıç Tarihi:</label>
+      <input type="datetime-local" id="calendar" name="calendar">
+    </div>
+    <div class="form-group">
+      <label for="duration">Süre (Saat):</label>
+      <select id="duration" name="duration">
+        <option value="1">1 Saat</option>
+        <option value="2">2 Saat</option>
+        <option value="3">3 Saat</option>
+        <option value="4">4 Saat</option>
+        <option value="5">5 Saat</option>
+        <option value="6">6 Saat</option>
+        <option value="7">7 Saat</option>
+        <option value="8">8 Saat</option>
+      </select>
+    </div>
+    <button id="view-chairs-btn">Görüntüle</button>
+    <div class="chair-container" id="chair-container">
+  </div>
+  </div>
+
+  <script src="js/getReservation.js"></script>
+</body>
+</html>

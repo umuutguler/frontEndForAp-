@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>User</title>
+</head>
+<body>
+  <script>
+    const url = "https://localhost:7190/api/userInfo/allUsers";
+
+    const xhr = new XMLHttpRequest();
+    xhr.open("GET", url);
+
+    // Header ekleme
+    xhr.setRequestHeader("Accept", "application/json");
+    xhr.setRequestHeader("Authorization", `Bearer ${{token}}`);
+
+    xhr.onload = function() {
+      if (xhr.status === 200) {
+        const jsonData = JSON.parse(xhr.responseText);
+        // Gelen JSON verileri ile işlem yap
+        console.log(jsonData);
+
+        // Örnek: Verileri bir tabloya yerleştirme
+        const tableBody = document.getElementById("tableBody");
+        for (const user of jsonData) {
+          const row = `<tr>
+            <td>${user.id}</td>
+            <td>${user.firstName}</td>
+            <td>${user.email}</td>
+          </tr>`;
+          tableBody.innerHTML += row;
+        }
+      } else {
+        console.error("Hata:", xhr.statusText);
+      }
+    };
+
+    xhr.send();
+  </script>
+
+  <h2>Kullanıcı Listesi</h2>
+  <table id="usersTable">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Ad</th>
+        <th>E-posta</th>
+      </tr>
+    </thead>
+    <tbody id="tableBody"></tbody>
+  </table>
+</body>
+</html>

@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rezervasyon Güncelle</title>
+  <link rel="stylesheet" href="css/updateReservation.css">
+</head>
+<body>
+  <div class="container">
+    <h1>Rezervasyon Güncelle</h1>
+
+    <!-- Reservation bilgilerini gösteren yapı -->
+    <div id="reservation-details" class="hidden">
+      <h2>Rezervasyon Detayları</h2>
+      <p><strong>ID:</strong> <span id="reservation-id"></span></p>
+      <p><strong>Status:</strong> <span id="reservation-status"></span></p>
+      <p><strong>Fiyat:</strong> <span id="reservation-price"></span></p>
+      <p><strong>Süre:</strong> <span id="reservation-duration"></span></p>
+      <p><strong>Başlangıç Tarihi:</strong> <span id="reservation-start-date"></span></p>
+      <p><strong>Bitiş Tarihi:</strong> <span id="reservation-end-date"></span></p>
+      <p><strong>Oluşturulma Tarihi:</strong> <span id="reservation-create-date"></span></p>
+      <p><strong>Koltuk ID:</strong> <span id="reservation-chair-id"></span></p>
+    </div>
+
+    <h2>Rezervasyon Güncelle</h2>
+    <div class="form-group">
+      <label for="calendar">Başlangıç Tarihi:</label>
+      <input type="datetime-local" id="calendar" name="calendar">
+    </div>
+    <div class="form-group">
+      <label for="duration">Süre (Saat):</label>
+      <select id="duration" name="duration">
+        <option value="1">1 Saat</option>
+        <option value="2">2 Saat</option>
+        <option value="3">3 Saat</option>
+        <option value="4">4 Saat</option>
+        <option value="5">5 Saat</option>
+        <option value="6">6 Saat</option>
+        <option value="7">7 Saat</option>
+        <option value="8">8 Saat</option>
+      </select>
+    </div>
+    <button id="view-chairs-btn">Görüntüle</button>
+    <div class="chair-container" id="chair-container">
+    
+  </div>
+
+  <script src="js/updateReservation.js"></script>
+</body>
+</html>
