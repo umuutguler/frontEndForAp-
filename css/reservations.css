@@ -8,6 +8,55 @@ h2 {
   text-align: center;
 }
 
+.form-button-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.form-group {
+  flex: 1;
+  margin-right: 10px;
+}
+
+.res-button-container {
+  flex: 1;
+  text-align: right;
+  
+}
+
+button{
+  width: 100%; /* Tam genişlik */
+  height: 100%; /* Tam genişlik */
+  max-width: 100%; /* Maksimum genişlik */
+  max-height: 100%; /* Maksimum genişlik */
+  background-color: #45a049; /* Renk #45a049 */
+  cursor: pointer;
+  border: none;
+  padding: 8px 16px;
+  margin: 4px;
+  color: #fff;
+  border-radius: 4px;
+}
+
+label {
+  display: block;
+  margin-bottom: 5px;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  box-sizing: border-box;
+  font-size: 16px;
+}
+select option:checked {
+  background-color: #45a049;
+  color: #fff;
+}
 table {
   width: 100%;
   border-collapse: collapse;
@@ -32,9 +81,11 @@ th {
   margin: 4px;
   cursor: pointer;
   border-radius: 4px;
-  background-color: #45a049;
+  background-color: #45a049; /* Renk #45a049 */
   color: #fff;
   border: none;
+  width: 100%; /* Tam genişlik */
+  max-width: 100%; /* Maksimum genişlik */
 }
 
 .button:hover {

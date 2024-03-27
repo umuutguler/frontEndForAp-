@@ -35,9 +35,9 @@ document.addEventListener("DOMContentLoaded", function() {
       reservationStatusSpan.textContent = data.status;
       reservationPriceSpan.textContent = data.reservationPrice;
       reservationDurationSpan.textContent = data.duration;
-      reservationStartDateSpan.textContent = data.reservationStartDate;
-      reservationEndDateSpan.textContent = data.reservationEndDate;
-      reservationCreateDateSpan.textContent = data.createDate;
+      reservationStartDateSpan.textContent = formatDateForUI(data.reservationStartDate);
+      reservationEndDateSpan.textContent = formatDateForUI(data.reservationEndDate);
+      reservationCreateDateSpan.textContent = formatDateForUI(data.createDate);
       reservationChairIdSpan.textContent = data.chairId;
   
       // Formdaki başlangıç tarihi alanına rezervasyonun başlangıç tarihini yerleştir
@@ -88,6 +88,17 @@ document.addEventListener("DOMContentLoaded", function() {
     
       return `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
     }
+
+    function formatDateForUI(dateTimeString) {
+        const date = new Date(dateTimeString);
+        const hours = String(date.getHours()).padStart(2, '0');
+        const minutes = String(date.getMinutes()).padStart(2, '0');
+        const day = String(date.getDate()).padStart(2, '0');
+        const month = String(date.getMonth() + 1).padStart(2, '0');
+        const year = date.getFullYear();
+        
+        return `${hours}:${minutes} ${day}.${month}.${year}`;
+      }
   
   
     function displayChairs(chairs) {

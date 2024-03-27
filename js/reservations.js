@@ -1,3 +1,6 @@
+document.getElementById("create-reservation-btn").addEventListener("click", function() {
+  window.location.href = "getReservation.html";
+});
 document.addEventListener("DOMContentLoaded", function() {
     upToDateReservations();
     const reservationList = document.getElementById("reservation-list");
@@ -25,9 +28,9 @@ document.addEventListener("DOMContentLoaded", function() {
           <td>${reservation.status}</td>
           <td>${reservation.reservationPrice}</td>
           <td>${reservation.duration}</td>
-          <td>${reservation.reservationStartDate}</td>
-          <td>${reservation.reservationEndDate}</td>
-          <td>${reservation.createDate}</td>
+          <td>${formatDate(reservation.reservationStartDate)}</td>
+          <td>${formatDate(reservation.reservationEndDate)}</td>
+          <td>${formatDate(reservation.createDate)}</td>
           <td>${reservation.chairId}</td>
           <td class="button-container">
             <button class="button update-button" onclick="updateReservation(${reservation.id})">Güncelle</button>
@@ -52,6 +55,17 @@ document.addEventListener("DOMContentLoaded", function() {
       console.error("Error:", error);
     });
   });
+
+  function formatDate(dateTimeString) {
+    const date = new Date(dateTimeString);
+    const hours = String(date.getHours()).padStart(2, '0');
+    const minutes = String(date.getMinutes()).padStart(2, '0');
+    const day = String(date.getDate()).padStart(2, '0');
+    const month = String(date.getMonth() + 1).padStart(2, '0');
+    const year = date.getFullYear();
+    
+    return `${hours}:${minutes} ${day}.${month}.${year}`;
+  }
   
   function updateReservation(reservationId) {
     // Rezervasyon güncelleme sayfasına yönlendirme

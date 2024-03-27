@@ -33,19 +33,27 @@ document.addEventListener("DOMContentLoaded", function() {
       reservationStatusSpan.textContent = data.status;
       reservationPriceSpan.textContent = data.reservationPrice;
       reservationDurationSpan.textContent = data.duration;
-      reservationStartDateSpan.textContent = data.reservationStartDate;
-      reservationEndDateSpan.textContent = data.reservationEndDate;
-      reservationCreateDateSpan.textContent = data.createDate;
+      reservationStartDateSpan.textContent = formatDate(data.reservationStartDate);
+      reservationEndDateSpan.textContent = formatDate(data.reservationEndDate);
+      reservationCreateDateSpan.textContent = formatDate(data.createDate);
       reservationChairIdSpan.textContent = data.chairId;
-  
-      // Formdaki başlangıç tarihi alanına rezervasyonun başlangıç tarihini yerleştir
-      const reservationStartDateInput = document.getElementById("reservationStartDate");
-      reservationStartDateInput.value = formatDate(data.reservationStartDate); // Tarih formatını düzgün formata dönüştür
     })
     .catch(error => {
       console.error("Error:", error);
     });
     homeBtn.addEventListener('click', function() {
-        window.location.href = 'index.html';
+        window.location.href = 'reservations.html';
     });
+
+    function formatDate(dateTimeString) {
+      const date = new Date(dateTimeString);
+      const hours = String(date.getHours()).padStart(2, '0');
+      const minutes = String(date.getMinutes()).padStart(2, '0');
+      const day = String(date.getDate()).padStart(2, '0');
+      const month = String(date.getMonth() + 1).padStart(2, '0');
+      const year = date.getFullYear();
+      
+      return `${hours}:${minutes} ${day}.${month}.${year}`;
+    }
+
 });

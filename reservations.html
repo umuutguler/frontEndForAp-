@@ -9,19 +9,31 @@
 <body>
   <div class="reservation-container">
     <h2>Rezervasyonlar</h2>
+    <div class="form-button-container">
+      <div class="form-group">
+        <select id="status" name="status">
+          <option value="all-reservations">Hepsi</option>
+          <option value="current">Güncel</option>
+          <option value="nonCurrent">Güncel Olmayan</option>
+          <option value="canceled">İptal Edilmiş</option>
+        </select>
+      </div>
+      <div class="res-button-container">
+        <button id="create-reservation-btn">Reservasyon Oluştur</button>
+      </div>
+    </div>
     <table id="reservation-table">
       <thead>
         <tr>
           <th>ID</th>
-          <th>Status</th>
+          <th>Durum</th>
           <th>Fiyat</th>
-          <th>Süre</th>
+          <th>Süre(Saat)</th>
           <th>Başlangıç Tarihi</th>
-          
           <th>Bitiş Tarihi</th>
           <th>Oluşturulma Tarihi</th>
-          <th>Koltuk ID</th>
-          <th>İşlemler</th>
+          <th>Koltuk</th>
+          <th></th>
         </tr>
       </thead>
       <tbody id="reservation-list"></tbody>
