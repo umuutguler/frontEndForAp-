@@ -2,17 +2,19 @@ document.getElementById("create-reservation-btn").addEventListener("click", func
   window.location.href = "getReservation.html";
 });
 document.addEventListener("DOMContentLoaded", function() {
-    upToDateReservations();
-    const reservationList = document.getElementById("reservation-list");
-  
-    // Token
-    const token = localStorage.getItem('accessToken');
-  
-    // API URL
-    const apiUrl = "https://localhost:7190/api/Reservation/user";
+  upToDateReservations();
+  const reservationList = document.getElementById("reservation-list");
+  const statusSelect = document.getElementById("status");
 
-    // GET request
-    fetch(apiUrl, {
+  // Token
+  const token = localStorage.getItem('accessToken');
+
+  // API URL
+  const apiUrl = "https://localhost:7190/api/Reservation/user?pageSize=10&pageNumber=1";
+
+  // GET request
+  function fetchReservations(status) {
+    fetch(apiUrl + "&status=" + status, {
       method: "GET",
       headers: {
         "Authorization": `Bearer ${token}`,
@@ -21,6 +23,7 @@ document.addEventListener("DOMContentLoaded", function() {
     })
     .then(response => response.json())
     .then(data => {
+      reservationList.innerHTML = ""; // Mevcut listeyi temizle
       data.forEach(reservation => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -37,9 +40,7 @@ document.addEventListener("DOMContentLoaded", function() {
             <button class="button cancel-button" onclick="cancelReservation(${reservation.id})">İptal</button>
           </td>
         `;
-  
         reservationList.appendChild(row);
-  
         // Buton rengini ayarla
         const cancelButton = row.querySelector(".cancel-button");
         const updateButton = row.querySelector(".update-button");
@@ -54,67 +55,78 @@ document.addEventListener("DOMContentLoaded", function() {
     .catch(error => {
       console.error("Error:", error);
     });
+  }
+
+  // Seçim değiştiğinde filtreleme işlemini gerçekleştir
+  statusSelect.addEventListener("change", function() {
+    const selectedStatus = statusSelect.value;
+    fetchReservations(selectedStatus);
   });
 
-  function formatDate(dateTimeString) {
-    const date = new Date(dateTimeString);
-    const hours = String(date.getHours()).padStart(2, '0');
-    const minutes = String(date.getMinutes()).padStart(2, '0');
-    const day = String(date.getDate()).padStart(2, '0');
-    const month = String(date.getMonth() + 1).padStart(2, '0');
-    const year = date.getFullYear();
-    
-    return `${hours}:${minutes} ${day}.${month}.${year}`;
-  }
-  
-  function updateReservation(reservationId) {
-    // Rezervasyon güncelleme sayfasına yönlendirme
-    window.location.href = `updateReservation.html?id=${reservationId}`;
-  }
-  
-  function cancelReservation(reservationId) {
-    const url = `https://localhost:7190/api/Reservation/cancel/${reservationId}`;
-  
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-        'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
-      }
-    })
-    .then(response => {
-      if (response.status === 204) {
-        // Rezervasyon başarıyla iptal edildi
-        alert('Rezervasyon başarıyla iptal edildi.');
-        // Sayfayı yenile
-        window.location.reload();
-      } else {
-        throw new Error('Rezervasyon iptal edilemedi. Sunucu hatası.');
-      }
-    })
-    .catch(error => {
-      console.error('Hata:', error.message);
-    });
-  }
-  
-  function upToDateReservations() {
-    const url = `https://localhost:7190/api/Reservation/uptodate`;
-  
-    fetch(url, {
-      method: 'PUT',
-      headers: {
-        'Content-Type': 'application/json',
-        'Accept': 'application/json',
-      }
-    })
-    .then(response => {
-      if (response.status === 204) {
-      } else {
-        throw new Error('Rezervasyon güncellenemedi. Sunucu hatası.');
-      }
-    })
-    .catch(error => {
-      console.error('Hata:', error.message);
-    });
+  // İlk yükleme için tüm rezervasyonları getir
+  fetchReservations("");
+
+});
+
+function formatDate(dateTimeString) {
+  const date = new Date(dateTimeString);
+  const hours = String(date.getHours()).padStart(2, '0');
+  const minutes = String(date.getMinutes()).padStart(2, '0');
+  const day = String(date.getDate()).padStart(2, '0');
+  const month = String(date.getMonth() + 1).padStart(2, '0');
+  const year = date.getFullYear();
+
+  return `${hours}:${minutes} ${day}.${month}.${year}`;
+}
+
+function updateReservation(reservationId) {
+  // Rezervasyon güncelleme sayfasına yönlendirme
+  window.location.href = `updateReservation.html?id=${reservationId}`;
+}
+
+function cancelReservation(reservationId) {
+  const url = `https://localhost:7190/api/Reservation/cancel/${reservationId}`;
+
+  fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+      'Authorization': `Bearer ${localStorage.getItem('accessToken')}`
+    }
+  })
+  .then(response => {
+    if (response.status === 204) {
+      // Rezervasyon başarıyla iptal edildi
+      alert('Rezervasyon başarıyla iptal edildi.');
+      // Sayfayı yenile
+      window.location.reload();
+    } else {
+      throw new Error('Rezervasyon iptal edilemedi. Sunucu hatası.');
+    }
+  })
+  .catch(error => {
+    console.error('Hata:', error.message);
+  });
+}
+
+function upToDateReservations() {
+  const url = `https://localhost:7190/api/Reservation/uptodate`;
+
+  fetch(url, {
+    method: 'PUT',
+    headers: {
+      'Content-Type': 'application/json',
+      'Accept': 'application/json',
+    }
+  })
+  .then(response => {
+    if (response.status === 204) {
+    } else {
+      throw new Error('Rezervasyon güncellenemedi. Sunucu hatası.');
+    }
+  })
+  .catch(error => {
+    console.error('Hata:', error.message);
+  });
 }
