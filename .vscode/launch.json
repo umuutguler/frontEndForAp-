@@ -7,7 +7,7 @@
         {
             "type": "msedge",
             "request": "launch",
-            "name": "Open index.html",
+            "name": "Open login.html",
             "file": "c:\\Users\\Umut.Guler\\Desktop\\frontEndForApı\\index.html"
         }
     ]

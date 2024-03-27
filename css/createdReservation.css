@@ -1,0 +1,70 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+  }
+  
+  .container {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+  }
+  
+  h1 {
+    text-align: center;
+    margin-bottom: 20px;
+  }
+  
+  img {
+    display: block; /* Resmi blok element olarak ayarla */
+    margin: auto; /* Dikey hizalamayı sağla */
+    width: 30%; /* Genişlik yüzde olarak ayarla */
+    height: auto; /* Yüksekliği otomatik olarak ayarla */
+  }
+  
+
+  button {
+    display: block;
+    width: 100%;
+    padding: 10px;
+    background-color: #45a049;
+    color: #fff;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #45a049;
+  }
+  
+  .hidden {
+    display: none;
+  }
+  
+  #reservation-details {
+    max-width: 600px;
+    margin: 20px auto;
+    padding: 20px;
+    background-color: #fff;
+    border-radius: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    margin-top: 30px;
+  }
+  
+  #reservation-details h2 {
+    margin-bottom: 10px;
+  }
+  
+  #reservation-details p {
+    margin: 5px 0;
+    font-size: 16px;
+  }
+  
+  #reservation-details p strong {
+    margin-right: 10px;
+  }

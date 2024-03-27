@@ -89,13 +89,15 @@ document.addEventListener("DOMContentLoaded", function() {
                   body: JSON.stringify(reservationData)
               })
               .then(response => {
-                  if (response.ok) {
-                      alert("Rezervasyon başarıyla oluşturuldu!");
-                      window.location.href = "reservations.html";
-                  } else {
-                      throw new Error('Bir hata oluştu. Sunucudan yanıt alınamadı.');
-                  }
-              })
+                if (response.ok) {
+                    return response.json(); // JSON yanıtını işle
+                } else {
+                    throw new Error('Bir hata oluştu. Sunucudan yanıt alınamadı.');
+                }
+            })
+            .then(data => {
+                createdReservation(data.id); // Oluşturulan rezervasyonun ID'sini aldığımız fonksiyona gönder
+            })
               .catch(error => {
                   console.error("Hata:", error);
                   alert("Rezervasyon oluşturulamadı. Bir hata oluştu.");
@@ -105,4 +107,9 @@ document.addEventListener("DOMContentLoaded", function() {
           chairContainer.appendChild(chairElement);
       });
   }
+
+  function createdReservation(reservationId) {
+    window.location.href = `createdReservation.html?id=${reservationId}`;
+  }
+
 });
