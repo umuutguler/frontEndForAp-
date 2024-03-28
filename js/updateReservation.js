@@ -11,6 +11,7 @@ document.addEventListener("DOMContentLoaded", function() {
     const reservationChairIdSpan = document.getElementById("reservation-chair-id");
     const viewChairsBtn = document.getElementById("view-chairs-btn");
     const chairContainer = document.getElementById("chair-container");
+    const reservationStartDateInput = document.getElementById("calendar");
   
     // Rezervasyon ID'sini alma
     const urlParams = new URLSearchParams(window.location.search);
@@ -39,10 +40,6 @@ document.addEventListener("DOMContentLoaded", function() {
       reservationEndDateSpan.textContent = formatDateForUI(data.reservationEndDate);
       reservationCreateDateSpan.textContent = formatDateForUI(data.createDate);
       reservationChairIdSpan.textContent = data.chairId;
-  
-      // Formdaki başlangıç tarihi alanına rezervasyonun başlangıç tarihini yerleştir
-      const reservationStartDateInput = document.getElementById("reservationStartDate");
-      reservationStartDateInput.value = formatDate(data.reservationStartDate); // Tarih formatını düzgün formata dönüştür
     })
     .catch(error => {
       console.error("Error:", error);

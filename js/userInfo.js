@@ -1,6 +1,7 @@
 document.addEventListener("DOMContentLoaded", function () {
     var userInfoDiv = document.getElementById('user-info');
     var updateBtn = document.getElementById('update-btn');
+    var logoutbtn = document.getElementById('logout-btn');
   
     // Token ve locale bilgisini burada alabilirsiniz
     var token = 'token_bilgisi_buraya';
@@ -36,5 +37,13 @@ document.addEventListener("DOMContentLoaded", function () {
       // Kullanıcıyı updateUser.html sayfasına yönlendir
       window.location.href = 'updateUser.html';
   });
+  logoutbtn.addEventListener('click', function() {
+    // localStorage'dan accessToken'ı sil
+    localStorage.removeItem('accessToken');
+    // Kullanıcıyı login sayfasına yönlendir
+    window.location.href = 'login.html';
+});
+
+
   });
   
