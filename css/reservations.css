@@ -4,6 +4,16 @@
   padding: 20px;
 }
 
+.userInfo {
+  width: 10%; /* Container'ın genişliğinin 10'da biri kadar */
+  margin-right: 20px; /* Sağ tarafa boşluk eklemek için */
+  margin-left: auto;
+}
+
+.userInfo img {
+  width: 100%; /* Resmin container'a tam oturmasını sağlar */
+}
+
 h2 {
   text-align: center;
 }

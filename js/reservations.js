@@ -9,31 +9,14 @@ document.addEventListener("DOMContentLoaded", function() {
   let currentPage = 1; // Mevcut sayfa
 
   // Pagination
-  const totalPages = 8; // Örneğin toplam sayfa sayısı
+  let totalPages = 8; // Örneğin varsayılan toplam sayfa sayısı
   const paginationContainer = document.getElementById("pagination-buttons");
   const paginationButtons = []; // Butonları saklamak için bir dizi oluştur
-
-  // Butonları oluştur
-  for (let i = 1; i <= totalPages; i++) {
-    const button = document.createElement("button");
-    button.textContent = i;
-    button.classList.add("pagination-button");
-    if (i === currentPage) {
-      button.classList.add("active");
-    }
-    button.addEventListener("click", () => {
-      currentPage = i; // Sayfa numarasını güncelle
-      fetchReservations(statusSelect.value, currentPage); // Rezervasyonları getir
-      updatePaginationButtons(); // Buton durumunu güncelle
-    });
-    paginationButtons.push(button); // Dizide sakla
-    paginationContainer.appendChild(button);
-  }
 
   // API'den rezervasyonları getirme fonksiyonu
   function fetchReservations(status, page) {
     const token = localStorage.getItem('accessToken');
-    const apiUrl = `https://localhost:7190/api/Reservation/user?pageSize=8&pageNumber=${page}`;
+    const apiUrl = `https://localhost:7190/api/Reservation/user?pageSize=7&pageNumber=${page}`;
 
     fetch(apiUrl + "&status=" + status, {
       method: "GET",
@@ -46,6 +29,9 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(data => {
       reservationList.innerHTML = ""; // Mevcut listeyi temizle
       const reservations = data.reservations;
+      const metaData = data.metaData;
+      totalPages = metaData.totalPage; // Toplam sayfa sayısını güncelle
+      updatePaginationButtons(); // Pagination butonlarını güncelle
       reservations.forEach(reservation => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -87,18 +73,28 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Buton durumunu güncelleme fonksiyonu
   function updatePaginationButtons() {
-    paginationButtons.forEach((button, index) => {
-      if (index + 1 === currentPage) {
+    paginationContainer.innerHTML = ""; // Mevcut butonları temizle
+    for (let i = 1; i <= totalPages; i++) {
+      const button = document.createElement("button");
+      button.textContent = i;
+      button.classList.add("pagination-button");
+      if (i === currentPage) {
         button.classList.add("active");
-      } else {
-        button.classList.remove("active");
       }
-    });
+      button.addEventListener("click", () => {
+        currentPage = i; // Sayfa numarasını güncelle
+        fetchReservations(statusSelect.value, currentPage); // Rezervasyonları getir
+        updatePaginationButtons(); // Buton durumunu güncelle
+      });
+      paginationButtons.push(button); // Dizide sakla
+      paginationContainer.appendChild(button);
+    }
   }
 
-  // İlk yükleme için tüm rezervasyonları getir
+  // İlk yükleme için tüm rezervasyonları ve pagination butonlarını getir
   fetchReservations("current", currentPage);
 });
+
 
 function formatDate(dateTimeString) {
   const date = new Date(dateTimeString);
@@ -161,4 +157,7 @@ function upToDateReservations() {
   .catch(error => {
     console.error('Hata:', error.message);
   });
+}
+function goToPage(page) {
+  window.location.href = page;
 }

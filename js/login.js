@@ -24,7 +24,7 @@ function login() {
       const refreshToken = data.refreshToken; // Refresh token'ı al
       localStorage.setItem('accessToken', accessToken); // Access token'ı local storage'a kaydet
       localStorage.setItem('refreshToken', refreshToken); // Refresh token'ı local storage'a kaydet
-      window.location.href = 'index.html'; // Yönlendirme
+      window.location.href = 'reservations.html'; // Yönlendirme
     })
     .catch(error => {
       document.getElementById("error-message").innerText = error.message;
