@@ -1,43 +1,53 @@
 body {
-    font-family: Arial, sans-serif;
-    margin: 0;
-    padding: 0;
-    background-color: #f4f4f4;
-  }
-  
-  .container {
-    max-width: 600px;
-    margin: 20px auto;
-    padding: 20px;
-    background-color: #fff;
-    border-radius: 5px;
-    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-  }
-  
-  h1 {
-    text-align: center;
-  }
-  
-  .user-info {
-    margin-bottom: 20px;
-  }
-  
-  .user-info p {
-    margin: 5px 0;
-  }
-  
-  .update-btn {
-    display: block;
-    margin-left: auto;
-    background-color: #45a049;
-    color: #fff;
-    border: none;
-    padding: 10px 20px;
-    border-radius: 5px;
-    cursor: pointer;
-  }
-  
-  .update-btn:hover {
-    background-color: #45a049;
-  }
-  
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  background-color: #f4f4f4;
+}
+
+.container {
+  max-width: 600px;
+  margin: 20px auto;
+  padding: 20px;
+  background-color: #fff;
+  border-radius: 5px;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+h1 {
+  text-align: center;
+}
+
+.user-info {
+  margin-bottom: 20px;
+}
+
+.user-info p {
+  margin: 5px 0;
+}
+
+.update-btn,
+.logout-btn {
+  display: block; /* Her bir düğmeyi bir satıra yerleştir */
+  width: 100%; /* Tam genişlik */
+  margin-top: 10px; /* Üstteki boşluk */
+  background-color: #45a049; /* Varsayılan düğme rengi (Yeşil) */
+  color: #fff;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s; /* Arka plan renginde yumuşak geçiş */
+}
+
+.update-btn:hover {
+  background-color: #215223; /* Fare üzerine gelindiğinde update button rengini değiştir (Yeşil) */
+}
+
+.logout-btn {
+  background-color: #9c2525; /* Logout button rengi (Kırmızı) */
+}
+
+.logout-btn:hover {
+  background-color: #5b1616; /* Fare üzerine gelindiğinde logout button rengini değiştir (Kırmızı) */
+}

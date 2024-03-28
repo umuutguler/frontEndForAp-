@@ -5,14 +5,36 @@
 }
 
 .userInfo {
-  width: 10%; /* Container'ın genişliğinin 10'da biri kadar */
-  margin-right: 20px; /* Sağ tarafa boşluk eklemek için */
-  margin-left: auto;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end; /* Öğeleri sağa hizalar */
+  width: 90%; /* Container'ın genişliğinin 90'ını kaplar */
 }
 
-.userInfo img {
-  width: 100%; /* Resmin container'a tam oturmasını sağlar */
+.userImg {
+  width: 10%; /* Resmin container'ın genişliğinin 15'ini kaplamasını sağlar */
+  margin-right: 10px;
+  margin-left: 10px;
+  display: flex;
+  flex-direction: row; /* Öğeleri yan yana hizalamak için */
+  align-items: center; /* Öğeleri dikey hizalamak için */
+  transition: transform 0.2s; /* Yumuşak geçiş efekti için */
 }
+
+.userImg:hover img {
+  transform: scale(1.1); /* Fare üzerine gelindiğinde resmi biraz büyüt */
+}
+
+.userImg img {
+  width: 100%;
+}
+
+.userName h3 {
+  margin-left: 10px; /* Resmin sağında biraz boşluk bırakır */
+}
+
+
+
 
 h2 {
   text-align: center;
@@ -48,6 +70,9 @@ h2 {
   margin: 4px;
   color: #fff;
   border-radius: 4px;
+}
+#create-reservation-btn:hover {
+  background-color: #215223;
 }
 
 label {
@@ -86,7 +111,7 @@ th {
   text-align: center;
 }
 
-#table-button {
+.update-button {
   padding: 8px 16px;
   margin: 4px;
   cursor: pointer;
@@ -96,15 +121,36 @@ th {
   border: none;
   width: 100%; /* Tam genişlik */
   max-width: 100%; /* Maksimum genişlik */
+  transition: background-color 0.3s; /* Arka plan renginde yumuşak geçiş */
 }
 
-.table-button:hover {
-  background-color: #45a049;
+.update-button:hover {
+  background-color: #215223;
 }
+
+.cancel-button {
+  padding: 8px 16px;
+  margin: 4px;
+  cursor: pointer;
+  border-radius: 4px;
+  background-color: #45a049; /* Renk #45a049 */
+  color: #fff;
+  border: none;
+  width: 100%; /* Tam genişlik */
+  max-width: 100%; /* Maksimum genişlik */
+  transition: background-color 0.3s;
+}
+
+.cancel-button:hover {
+  background-color: #8a1616;
+}
+
+
+
 
 .pagination-container {
   display: flex;
-  justify-content: center
+  justify-content: center;
 }
 
 .pagination-button {
@@ -113,6 +159,11 @@ th {
   background-color: #f2f2f2;
   border: 1px solid #ccc;
   cursor: pointer;
+}
+
+.pagination-button:hover {
+  background-color: rgb(118, 118, 118); /* Farenin üzerine gelindiğinde kırmızı yap */
+  color: white;
 }
 
 .pagination-button.active {

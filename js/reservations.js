@@ -29,9 +29,18 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(data => {
       reservationList.innerHTML = ""; // Mevcut listeyi temizle
       const reservations = data.reservations;
+      const firstReservation = reservations[0]; // İlk rezervasyonu al
+      const user = firstReservation.user; // Rezervasyondaki kullanıcı bilgisi
+      const firstName = user.firstName;
+      const lastName = user.lastName;
+      const fullname = firstName + " " + lastName;
+      const userNameH3 = document.querySelector(".userName h3");
+      userNameH3.textContent = fullname;
+
       const metaData = data.metaData;
       totalPages = metaData.totalPage; // Toplam sayfa sayısını güncelle
       updatePaginationButtons(); // Pagination butonlarını güncelle
+
       reservations.forEach(reservation => {
         const row = document.createElement("tr");
         row.innerHTML = `
@@ -44,8 +53,8 @@ document.addEventListener("DOMContentLoaded", function() {
           <td>${formatDate(reservation.createDate)}</td>
           <td>${reservation.chairId}</td>
           <td class="button-container">
-            <button id="table-button" class="button update-button" onclick="updateReservation(${reservation.id})">Güncelle</button>
-            <button id="table-button" class="button cancel-button" onclick="cancelReservation(${reservation.id})">İptal</button>
+            <button id="update-button" class="button update-button" onclick="updateReservation(${reservation.id})">Güncelle</button>
+            <button id="cancel-button" class="button cancel-button" onclick="cancelReservation(${reservation.id})">İptal</button>
           </td>
         `;
         reservationList.appendChild(row);
