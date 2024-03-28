@@ -7,10 +7,9 @@ document.addEventListener("DOMContentLoaded", function() {
   const statusSelect = document.getElementById("status");
 
   let currentPage = 1; // Mevcut sayfa
-  const pageSize = 10; // Sayfa boyutu
 
   // Pagination
-  const totalPages = 5; // Örneğin toplam sayfa sayısı
+  const totalPages = 8; // Örneğin toplam sayfa sayısı
   const paginationContainer = document.getElementById("pagination-buttons");
   const paginationButtons = []; // Butonları saklamak için bir dizi oluştur
 
@@ -34,7 +33,7 @@ document.addEventListener("DOMContentLoaded", function() {
   // API'den rezervasyonları getirme fonksiyonu
   function fetchReservations(status, page) {
     const token = localStorage.getItem('accessToken');
-    const apiUrl = `https://localhost:7190/api/Reservation/user?pageSize=${pageSize}&pageNumber=${page}`;
+    const apiUrl = `https://localhost:7190/api/Reservation/user?pageSize=8&pageNumber=${page}`;
 
     fetch(apiUrl + "&status=" + status, {
       method: "GET",
@@ -46,7 +45,8 @@ document.addEventListener("DOMContentLoaded", function() {
     .then(response => response.json())
     .then(data => {
       reservationList.innerHTML = ""; // Mevcut listeyi temizle
-      data.forEach(reservation => {
+      const reservations = data.reservations;
+      reservations.forEach(reservation => {
         const row = document.createElement("tr");
         row.innerHTML = `
           <td>${reservation.id}</td>
