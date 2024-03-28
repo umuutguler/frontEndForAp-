@@ -6,14 +6,36 @@ document.addEventListener("DOMContentLoaded", function() {
   const reservationList = document.getElementById("reservation-list");
   const statusSelect = document.getElementById("status");
 
-  // Token
-  const token = localStorage.getItem('accessToken');
+  let currentPage = 1; // Mevcut sayfa
+  const pageSize = 10; // Sayfa boyutu
 
-  // API URL
-  const apiUrl = "https://localhost:7190/api/Reservation/user?pageSize=10&pageNumber=1";
+  // Pagination
+  const totalPages = 5; // Örneğin toplam sayfa sayısı
+  const paginationContainer = document.getElementById("pagination-buttons");
+  const paginationButtons = []; // Butonları saklamak için bir dizi oluştur
 
-  // GET request
-  function fetchReservations(status) {
+  // Butonları oluştur
+  for (let i = 1; i <= totalPages; i++) {
+    const button = document.createElement("button");
+    button.textContent = i;
+    button.classList.add("pagination-button");
+    if (i === currentPage) {
+      button.classList.add("active");
+    }
+    button.addEventListener("click", () => {
+      currentPage = i; // Sayfa numarasını güncelle
+      fetchReservations(statusSelect.value, currentPage); // Rezervasyonları getir
+      updatePaginationButtons(); // Buton durumunu güncelle
+    });
+    paginationButtons.push(button); // Dizide sakla
+    paginationContainer.appendChild(button);
+  }
+
+  // API'den rezervasyonları getirme fonksiyonu
+  function fetchReservations(status, page) {
+    const token = localStorage.getItem('accessToken');
+    const apiUrl = `https://localhost:7190/api/Reservation/user?pageSize=${pageSize}&pageNumber=${page}`;
+
     fetch(apiUrl + "&status=" + status, {
       method: "GET",
       headers: {
@@ -36,8 +58,8 @@ document.addEventListener("DOMContentLoaded", function() {
           <td>${formatDate(reservation.createDate)}</td>
           <td>${reservation.chairId}</td>
           <td class="button-container">
-            <button class="button update-button" onclick="updateReservation(${reservation.id})">Güncelle</button>
-            <button class="button cancel-button" onclick="cancelReservation(${reservation.id})">İptal</button>
+            <button id="table-button" class="button update-button" onclick="updateReservation(${reservation.id})">Güncelle</button>
+            <button id="table-button" class="button cancel-button" onclick="cancelReservation(${reservation.id})">İptal</button>
           </td>
         `;
         reservationList.appendChild(row);
@@ -59,13 +81,23 @@ document.addEventListener("DOMContentLoaded", function() {
 
   // Seçim değiştiğinde filtreleme işlemini gerçekleştir
   statusSelect.addEventListener("change", function() {
-    const selectedStatus = statusSelect.value;
-    fetchReservations(selectedStatus);
+    fetchReservations(statusSelect.value, currentPage); // Sayfayı güncelle
+    updatePaginationButtons(); // Buton durumunu güncelle
   });
 
-  // İlk yükleme için tüm rezervasyonları getir
-  fetchReservations("current");
+  // Buton durumunu güncelleme fonksiyonu
+  function updatePaginationButtons() {
+    paginationButtons.forEach((button, index) => {
+      if (index + 1 === currentPage) {
+        button.classList.add("active");
+      } else {
+        button.classList.remove("active");
+      }
+    });
+  }
 
+  // İlk yükleme için tüm rezervasyonları getir
+  fetchReservations("current", currentPage);
 });
 
 function formatDate(dateTimeString) {

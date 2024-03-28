@@ -26,7 +26,7 @@ h2 {
   
 }
 
-button{
+#create-reservation-btn {
   width: 100%; /* Tam genişlik */
   height: 100%; /* Tam genişlik */
   max-width: 100%; /* Maksimum genişlik */
@@ -76,7 +76,7 @@ th {
   text-align: center;
 }
 
-.button {
+#table-button {
   padding: 8px 16px;
   margin: 4px;
   cursor: pointer;
@@ -88,6 +88,25 @@ th {
   max-width: 100%; /* Maksimum genişlik */
 }
 
-.button:hover {
+.table-button:hover {
   background-color: #45a049;
 }
+
+.pagination-container {
+  display: flex;
+  justify-content: center
+}
+
+.pagination-button {
+  padding: 5px 10px;
+  margin: 2px;
+  background-color: #f2f2f2;
+  border: 1px solid #ccc;
+  cursor: pointer;
+}
+
+.pagination-button.active {
+  background-color: #4CAF50;
+  color: white;
+}
+
