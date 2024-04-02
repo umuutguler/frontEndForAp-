@@ -1,0 +1,71 @@
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f4f4;
+    margin: 0;
+    padding: 0;
+  }
+  
+  .payment-container {
+    max-width: 400px;
+    margin: 50px auto;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  }
+  
+  .form-group {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"],
+  select {
+    width: 100%;
+    padding: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 16px;
+    margin-top: 5px;
+  }
+  
+  button {
+    width: 100%;
+    padding: 10px;
+    border: none;
+    border-radius: 4px;
+    background-color: #45a049;
+    color: #fff;
+    font-size: 16px;
+    cursor: pointer;
+  }
+  
+  button:hover {
+    background-color: #3d8b40;
+  }
+  
+  .expiration-group {
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  .expiration-group input[type="text"],
+  .expiration-group select {
+    width: calc(33.33% - 5px);
+  }
+  
+  /* CVV alanının stilini özelleştir */
+  #cvv {
+    width: calc(33.33% - 5px);
+  }
+  
+  /* CVV alanıyla etkileşime geçmek için biraz aralık bırak */
+  .cvv-group {
+    margin-top: 20px;
+  }
+  
+  /* CVV alanının içindeki metni özelleştir */
+  #cvv::placeholder {
+    color: #ccc;
+  }
+  

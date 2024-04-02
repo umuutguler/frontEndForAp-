@@ -1,3 +1,4 @@
+upToDateReservations();
 document.getElementById("create-reservation-btn").addEventListener("click", function() {
   window.location.href = "getReservation.html";
 });

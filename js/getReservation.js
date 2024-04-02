@@ -61,6 +61,10 @@ document.addEventListener("DOMContentLoaded", function () {
             chairIdSpan.textContent = `Sandalye No: ${chair.id}`;
             chairElement.appendChild(chairIdSpan);
 
+            const chairPriceSpan = document.createElement("span");
+            chairPriceSpan.textContent = `Ücret: ${chair.price}$`;
+            chairElement.appendChild(chairPriceSpan);
+
             // Tıklanabilir chair
             chairElement.addEventListener("click", function () {
                 const selectedChairId = chair.id;
@@ -71,47 +75,21 @@ document.addEventListener("DOMContentLoaded", function () {
                 // Modalı göster
                 modal.style.display = "block";
 
-
                 // Onayla butonuna tıklandığında
                 const confirmButton = document.getElementById("confirmButton");
                 confirmButton.addEventListener("click", function () {
-                    // POST isteği için gereken veri
-                    const reservationData = {
-                        reservationStartDate: document.getElementById("calendar").value,
-                        duration: document.getElementById("duration").value,
-                        chairId: selectedChairId
-                    };
+                    // Seçilen sandalyenin bilgilerini al
+                    const reservationStartDate = document.getElementById("calendar").value;
+                    const duration = document.getElementById("duration").value;
 
-                    // API URL
-                    const postUrl = "https://localhost:7190/api/Reservation";
+                    // Oluşturulan link için query string oluştur
+                    const queryString = `?reservationStartDate=${reservationStartDate}&duration=${duration}&chairId=${selectedChairId}`;
 
-                    // Token
-                    const token = localStorage.getItem('accessToken');
+                    // Yönlendirme yapılacak URL
+                    const redirectUrl = `payment.html${queryString}`;
 
-                    // POST request
-                    fetch(postUrl, {
-                        method: "POST",
-                        headers: {
-                            "Authorization": `Bearer ${token}`,
-                            "Content-Type": "application/json",
-                            "Accept": "application/json"
-                        },
-                        body: JSON.stringify(reservationData)
-                    })
-                        .then(response => {
-                            if (response.ok) {
-                                return response.json(); // JSON yanıtını işle
-                            } else {
-                                throw new Error('Bir hata oluştu. Sunucudan yanıt alınamadı.');
-                            }
-                        })
-                        .then(data => {
-                            createdReservation(data.id); // Oluşturulan rezervasyonun ID'sini aldığımız fonksiyona gönder
-                        })
-                        .catch(error => {
-                            console.error("Hata:", error);
-                            alert("Rezervasyon oluşturulamadı. Bir hata oluştu.");
-                        });
+                    // Sayfayı yönlendir
+                    window.location.href = redirectUrl;
 
                     // Modalı kapat
                     modal.style.display = "none";
@@ -138,13 +116,7 @@ document.addEventListener("DOMContentLoaded", function () {
                 });
             });
 
-
             chairContainer.appendChild(chairElement);
         });
     }
-
-    function createdReservation(reservationId) {
-        window.location.href = `createdReservation.html?id=${reservationId}`;
-    }
-
 });
