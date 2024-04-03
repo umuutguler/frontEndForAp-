@@ -76,7 +76,7 @@ document.addEventListener("DOMContentLoaded", function () {
         };
 
         // API URL
-        const postUrl = "https://localhost:7190/api/Reservation";
+        const postUrl = "https://localhost:7190/api/Reservation/with-payment";
         console.log(reservationData);
 
         // Token

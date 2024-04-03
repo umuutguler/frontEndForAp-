@@ -62,7 +62,7 @@ document.addEventListener("DOMContentLoaded", function () {
             chairElement.appendChild(chairIdSpan);
 
             const chairPriceSpan = document.createElement("span");
-            chairPriceSpan.textContent = `Ücret: ${chair.price}$`;
+            chairPriceSpan.textContent = `Ücret: ${chair.price}`;
             chairElement.appendChild(chairPriceSpan);
 
             // Tıklanabilir chair
